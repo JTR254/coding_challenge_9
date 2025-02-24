@@ -42,7 +42,7 @@ console.log(`Manager Bonus: $${mgr1.calculateBonus()}`); // logs the method to t
 
 // Task 3 - Company Class
 class Company { // creates class called "Company"
-    constructor (name) {
+    constructor (name, employees) {
         this.name = name;
         this.employees = []
     }
@@ -50,10 +50,14 @@ class Company { // creates class called "Company"
         this.employees.push(employee)
     }
     listEmployees() { // creates method that lists out each of the employees and their details.
-        this.employees.forEach(employees => console.log(employees))
+        this.employees.forEach(employee => console.log(employee.getDetails()))
     }
     calculateTotalPayroll() { // *task 4* - this calculates the total payroll of the employees
        return this.employees.reduce((total, emp) => total + emp.calculateAnnualSalary(), 0)
+    }
+    promoteToManager(employee, teamSize) { // *task 5* - this can promote an employee to manager
+        const index = this.employees.indexOf(employee);
+        this.employees[index] = new Manager (employee.name, employee.id, employee.department, employee.salary, teamSize);
     }
 };
 const company = new Company("TechCorp");
@@ -70,3 +74,9 @@ console.log(`Total Payroll: $${company.calculateTotalPayroll()}`);
 // Output: Total Payroll: $165600 (assuming emp1 and mgr1 salaries)
 // I added to Task 3, which is the company class
 // I added to Task 2, which is the manager class. This inherits from the employee class so it generates the correct output.
+
+// Task 5 - Promotion System
+
+company.promoteToManager(emp1, 3);
+company.listEmployees();
+// Output: "Manager: Alice Johnson, ID: 101, Department: Sales, Salary: $5000, Team Size: 3"
