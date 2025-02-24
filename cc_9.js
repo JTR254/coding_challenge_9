@@ -36,3 +36,24 @@ const mgr1 = new Manager("John Smith", 201, "IT", 8000, 5);
 console.log(mgr1.getDetails()); // logs the method to the console - Output: "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
 
 console.log(`Manager Bonus: $${mgr1.calculateBonus()}`); // logs the method to the console - Output: 9600
+
+// Task 3 - Company Class
+class Company { // creates class called "Company"
+    constructor (name) {
+        this.name = name;
+        this.employees = []
+    }
+    addEmployee(employee) { // creates method that adds an employee to the array
+        this.employees.push(employee)
+    }
+    listEmployees() { // creates method that lists out each of the employees and their details.
+        this.employees.forEach(employees => console.log(employees))
+    }
+};
+const company = new Company("TechCorp");
+company.addEmployee(emp1);
+company.addEmployee(mgr1);
+company.listEmployees();
+// Output:
+// "Employee: Alice Johnson, ID: 101, Department: Sales, Salary: $5000"
+// "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
