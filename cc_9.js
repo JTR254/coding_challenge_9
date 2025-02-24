@@ -10,7 +10,7 @@ class Employee { // creates employee class with details
         return `Name: ${this.name}, Employee ID: ${this.id}, Department: ${this.department} Salary: $${this.salary}`
     }
     calculateAnnualSalary() { // calculates the annual salary of the employee
-        return this.salary * 12;
+        return this.salary * 12
     }
 };
 
@@ -31,6 +31,9 @@ class Manager extends Employee { // creates Manager class that extends to the Em
     calculateBonus() { // creates method that returns 10% of the Manager's annual salary
         return this.salary * 12 * .10
     }
+    calculateAnnualSalary() {
+        return this.salary * 12 * 1.1 // *task 4* - this accounts for the manager's bonus after calculating their salary
+    }
 };
 const mgr1 = new Manager("John Smith", 201, "IT", 8000, 5);
 console.log(mgr1.getDetails()); // logs the method to the console - Output: "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
@@ -49,6 +52,9 @@ class Company { // creates class called "Company"
     listEmployees() { // creates method that lists out each of the employees and their details.
         this.employees.forEach(employees => console.log(employees))
     }
+    calculateTotalPayroll() { // *task 4* - this calculates the total payroll of the employees
+       return this.employees.reduce((total, emp) => total + emp.calculateAnnualSalary(), 0)
+    }
 };
 const company = new Company("TechCorp");
 company.addEmployee(emp1);
@@ -57,3 +63,10 @@ company.listEmployees();
 // Output:
 // "Employee: Alice Johnson, ID: 101, Department: Sales, Salary: $5000"
 // "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
+
+// Task 4 - Payroll System
+
+console.log(`Total Payroll: $${company.calculateTotalPayroll()}`);
+// Output: Total Payroll: $165600 (assuming emp1 and mgr1 salaries)
+// I added to Task 3, which is the company class
+// I added to Task 2, which is the manager class. This inherits from the employee class so it generates the correct output.
